@@ -1,0 +1,49 @@
+{
+  "name": "Zen Assistant",
+  "version": "1.0.0",
+  "slug": "zen_assistant",
+  "description": "An ambient information system for Home Assistant",
+  "url": "https://github.com/yourusername/zen_assistant",
+  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+  "startup": "application",
+  "boot": "auto",
+  "options": {
+    "data_sources": {
+      "traffic": "sensor.traffic_intensity",
+      "energy": "sensor.energy_consumption",
+      "weather": "weather.home"
+    },
+    "audio_output": {
+      "type": "local",
+      "device_index": 0
+    },
+    "update_interval": 60
+  },
+  "schema": {
+    "data_sources": {
+      "traffic": "str?",
+      "energy": "str?",
+      "weather": "str?",
+      "custom": [
+        {
+          "entity_id": "str",
+          "name": "str",
+          "min": "float?",
+          "max": "float?"
+        }
+      ]
+    },
+    "audio_output": {
+      "type": "list(local|media_player)",
+      "device_index": "int?",
+      "media_player_entity_id": "str?"
+    },
+    "update_interval": "int"
+  },
+  "ports": {
+    "8099/tcp": 8099
+  },
+  "webui": "http://[HOST]:[PORT:8099]",
+  "homeassistant_api": true,
+  "audio": true
+}
